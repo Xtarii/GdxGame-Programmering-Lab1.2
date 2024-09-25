@@ -113,8 +113,10 @@ public class ConversationUI extends Window {
             fullFilenamePath = COURTESY_PHRASES_PATH;
         }
 
+
+        // Conversation Label Text ( Title )
         currentEntityID = entityConfig.getEntityID();
-        this.getTitleLabel().setText(entityConfig.getEntityID());
+        this.getTitleLabel().setText(entityConfig.getName());
 
         ConversationGraph graph = json.fromJson(ConversationGraph.class, Gdx.files.internal(fullFilenamePath));
 

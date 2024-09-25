@@ -23,23 +23,23 @@ public class Topple extends Map {
 
         json = new Json();
 
-        Entity innKeeper = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_INNKEEPER);
+        Entity innKeeper = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_INNKEEPER, "Sofie");
         initSpecialEntityPosition(innKeeper);
         mapEntities.add(innKeeper);
 
-        Entity townfolk1 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK1);
+        Entity townfolk1 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK1, "Mother");
         initSpecialEntityPosition(townfolk1);
         mapEntities.add(townfolk1);
 
-        Entity townfolk2 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK2);
+        Entity townfolk2 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK2, "Ron");
         initSpecialEntityPosition(townfolk2);
         mapEntities.add(townfolk2);
 
-        Entity townfolk3 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK3);
+        Entity townfolk3 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK3, "John");
         initSpecialEntityPosition(townfolk3);
         mapEntities.add(townfolk3);
 
-        Entity townfolk4 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK4);
+        Entity townfolk4 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.TOWN_FOLK4, "Lily");
         initSpecialEntityPosition(townfolk4);
         mapEntities.add(townfolk4);
     }

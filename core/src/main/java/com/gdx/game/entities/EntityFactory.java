@@ -140,9 +140,33 @@ public class EntityFactory {
         }
     }
 
+    /**
+     * Gets new Entity Instance
+     *
+     * @param entityType Entity Type
+     * @param name Entity Name
+     * @return Entity Instance
+     */
+    public Entity getEntity(EntityType entityType, String name) {
+        Entity entity = getEntity(entityType);
+        entity.getEntityConfig().setName(name);
+        return entity;
+    }
+
     public Entity getEntityByName(EntityName entityName) {
         EntityConfig config = new EntityConfig(entities.get(entityName.toString()));
         return Entity.initEntity(config);
     }
 
+    /**
+     * Gets Entity by name
+     *
+     * @param entityName Entity ID Name
+     * @param name Entity Name
+     * @return Entity
+     */
+    public Entity getEntityByName(EntityName entityName, String name) {
+        EntityConfig config = new EntityConfig(entities.get(entityName.toString()));
+        return Entity.initEntity(config, name);
+    }
 }
