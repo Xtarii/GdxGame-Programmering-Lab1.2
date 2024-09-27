@@ -2,16 +2,18 @@ package com.gdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Json;
 import com.gdx.game.manager.PreferenceManager;
 import com.gdx.game.manager.ResourceManager;
-import com.gdx.game.networking.Client;
-import com.gdx.game.networking.Server;
+import com.gdx.game.networking.message.NetworkMessage;
+import com.gdx.game.networking.Socket;
 import com.gdx.game.screen.CharacterSelectionScreen;
 import com.gdx.game.screen.GameScreen;
 import com.gdx.game.screen.MenuScreen;
 
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class GdxGame extends Game {
 	private SpriteBatch batch;
@@ -59,15 +61,63 @@ public class GdxGame extends Game {
 
 
 		/// DEBUG
-		try{
+		try {
 			int port = 8080;
-			Server server = new Server(port);
-			System.out.println(server.read());
+			Socket server = Socket.host(port);
+			Socket client = Socket.join(server.address, port);
 
-		}catch(SocketException e) {
-			System.out.println("Server: " + e.getMessage());
-		}
-	}
+			// DEBUG
+			new Thread(() -> {
+                try {
+                    NetworkMessage message = server.read(1024);
+					System.out.println(message);
+
+                } catch(IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+			client.send(new Json().toJson(new NetworkMessage(server.address, "Hello World!")));
+
+		} catch(SocketException e) {
+            throw new RuntimeException(e);
+        } catch(UnknownHostException e) {
+            throw new RuntimeException(e);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+//		try {
+//			int port = 8080;
+//			Server server = new Server(port);
+//			DatagramSocket client = new DatagramSocket();
+//
+//			new Thread(() -> {
+//				byte[] data = new byte[1024];
+//				DatagramPacket packet = new DatagramPacket(data, data.length);
+//				try {
+//					server.receive(packet);
+//				} catch(IOException e) {
+//					System.out.println("Server: " + e.getMessage());
+//				}
+//				String message = new String(packet.getData()).split("--end")[0].strip();
+//				System.out.println("Message: " + message);
+//			}).start();
+//
+//			// Sends Message
+//			InetAddress ip = InetAddress.getByName("localhost");
+//			String message = "Hello World! --end";
+//			client.send(new DatagramPacket(message.getBytes(), message.getBytes().length, ip, port));
+//
+//			client.close();
+//			server.close();
+//
+//		}catch(SocketException e) {
+//			System.out.println(e.getMessage());
+//		} catch(UnknownHostException e) {
+//			System.out.println(e.getMessage());
+//        } catch(IOException e) {
+//			System.out.println(e.getMessage());
+//        }
+    }
 
 	@Override
 	public void dispose() {
