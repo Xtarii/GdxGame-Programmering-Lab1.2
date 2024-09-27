@@ -4,9 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gdx.game.manager.PreferenceManager;
 import com.gdx.game.manager.ResourceManager;
+import com.gdx.game.networking.Client;
+import com.gdx.game.networking.Server;
 import com.gdx.game.screen.CharacterSelectionScreen;
 import com.gdx.game.screen.GameScreen;
 import com.gdx.game.screen.MenuScreen;
+
+import java.io.IOException;
+import java.net.SocketException;
 
 public class GdxGame extends Game {
 	private SpriteBatch batch;
@@ -48,6 +53,20 @@ public class GdxGame extends Game {
 		characterSelectionScreen = new CharacterSelectionScreen(this, resourceManager);
 
 		this.setScreen(menuScreen);
+
+
+
+
+
+		/// DEBUG
+		try{
+			int port = 8080;
+			Server server = new Server(port);
+			System.out.println(server.read());
+
+		}catch(SocketException e) {
+			System.out.println("Server: " + e.getMessage());
+		}
 	}
 
 	@Override
