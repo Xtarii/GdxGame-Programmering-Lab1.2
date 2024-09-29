@@ -135,6 +135,31 @@ public class NetworkMessage {
         }
         return new NetworkMessage(InetAddress.getLocalHost(), message);
     }
+
+    /**
+     * Creates a network message object
+     * <p/>
+     * Data arguments should be formated after
+     * {@code <key>=<value>}.
+     * <p/>
+     * The Created Message UUID is set to
+     * custom and not the client UUID.
+     * If the client UUID is wanted - consider
+     * using {@link #create(MessageType, String...)}
+     * 
+     * @param type Message type
+     * @param uuid Message UUID
+     * @param args Message args
+     * @return Network Message
+     * @throws UnknownHostException Message Host Unknown Error
+     */
+    public static NetworkMessage create(MessageType type, UUID uuid, String... args) throws UnknownHostException {
+        String message = String.format("type=%s : uuid=%s", type, uuid);
+        for(String arg : args) {
+            message = message.concat(" : ").concat(arg);
+        }
+        return new NetworkMessage(InetAddress.getLocalHost(), message);
+    }
     /**
      * Creates an empty network message
      * <p/>

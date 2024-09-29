@@ -77,19 +77,17 @@ public class Socket extends UDPSocket {
     private void connectToServer() throws IOException {
         // Connect to server
         NetworkMessage message = NetworkMessage.createEmpty(NetworkMessage.MessageType.CONNECTION_MESSAGE);
+
+        new Thread(() -> {
+            try {
+                NetworkMessage res = read(1024);
+                System.out.println(res);
+
+            } catch(IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
         send(message.toString());
-
-        System.out.println("Sent message...");
-
-//        send(message.toString());
-//
-//        // Gets Data
-//
-//        NetworkMessage res = read(1024);
-//        System.out.println(res.toString());
-
-
-        NetworkMessage res = read(5000);
 
         // Create Local Client
         updateThread.start();

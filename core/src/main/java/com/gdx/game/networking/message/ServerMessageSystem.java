@@ -10,15 +10,14 @@ import java.net.UnknownHostException;
 public class ServerMessageSystem implements NetworkMessageSystem {
     @Override
     public void onConnection(NetworkMessage message) {
+//        if(message.get("uuid") != null) return; // Can't Respond to itself
         NetworkClient client = new NetworkClient(message.sender);
 
         try {
             Socket.getInstance().addClient(client);
             // Sends Client Data back
-            Socket.getInstance().send(client, NetworkMessage.create(
-                    NetworkMessage.MessageType.CONNECTION_MESSAGE,
-                    ("uuid=" + client.getUUID())
-            ).toString());
+            NetworkMessage msg = NetworkMessage.create(NetworkMessage.MessageType.CONNECTION_MESSAGE, client.getUUID());
+            Socket.getInstance().send(client, msg.toString());
 
         }catch(SocketException e) {
             throw new RuntimeException(e);
