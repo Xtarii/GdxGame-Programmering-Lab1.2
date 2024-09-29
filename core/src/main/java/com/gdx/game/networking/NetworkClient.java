@@ -2,15 +2,23 @@ package com.gdx.game.networking;
 
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.UUID;
 
 /**
  * Client Object
- * <p>
+ * <p/>
  * Represents a client
  * connected to the game server.
  */
 public class NetworkClient {
+    /**
+     * Local Client Instance
+     */
+    private static NetworkClient local;
+
+
+
     /**
      * Client Address
      */
@@ -35,7 +43,7 @@ public class NetworkClient {
 
     /**
      * Creates Client Object Instance
-     * <p>
+     * <p/>
      * Generates random UUID for
      * client identification.
      *
@@ -60,6 +68,31 @@ public class NetworkClient {
      * @return UUID
      */
     public UUID getUUID() { return uuid; }
+
+
+
+    /**
+     * Gets the Local Client Instance
+     *
+     * @return Local Client
+     * @throws UnknownHostException Host Error
+     */
+    public static NetworkClient getLocalInstance() throws UnknownHostException {
+        if(local != null) return local;
+        local = new NetworkClient(InetAddress.getLocalHost());
+        return local;
+    }
+
+    /**
+     * Sets Local Client Instance
+     *
+     * @param client Client Instance
+     * @throws ClientVerifierExeption Gets Thrown if local client is set
+     */
+    public static void setLocal(NetworkClient client) throws ClientVerifierExeption {
+        if(local != null) throw new ClientVerifierExeption();
+        local = client;
+    }
 
 
 

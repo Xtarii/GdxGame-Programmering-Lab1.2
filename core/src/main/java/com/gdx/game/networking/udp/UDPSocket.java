@@ -1,7 +1,10 @@
 package com.gdx.game.networking.udp;
 
 import com.gdx.game.networking.NetworkClient;
+import com.gdx.game.networking.message.ClientMessageSystem;
 import com.gdx.game.networking.message.NetworkMessage;
+import com.gdx.game.networking.message.NetworkMessageSystem;
+import com.gdx.game.networking.message.ServerMessageSystem;
 
 import java.io.IOException;
 import java.net.*;
@@ -13,10 +16,10 @@ import java.util.ArrayList;
 public class UDPSocket {
     /**
      * Server Clients List
-     * <p>
+     * <p/>
      * Stores all clients connected
      * to this server instance.
-     * <p>
+     * <p/>
      * Note, that if this {@link UDPSocket} is used
      * as a client socket, this list will not
      * contain any clients.
@@ -38,6 +41,10 @@ public class UDPSocket {
      * Socket Role
      */
     public final boolean isHost;
+    /**
+     * Socket Message System
+     */
+    public final NetworkMessageSystem messageSystem;
 
 
 
@@ -52,7 +59,10 @@ public class UDPSocket {
         socket = new DatagramSocket(port);
         address = InetAddress.getLocalHost();
         this.port = port;
-        isHost = false;
+        isHost = true;
+
+        // Message System
+        messageSystem = new ServerMessageSystem();
     }
     /**
      * Creates a UDP Socket Instance
@@ -65,7 +75,10 @@ public class UDPSocket {
         socket = new DatagramSocket();
         this.address = address;
         this.port = port;
-        isHost = true;
+        isHost = false;
+
+        // Message System
+        messageSystem = new ClientMessageSystem();
     }
 
 
@@ -132,7 +145,7 @@ public class UDPSocket {
      * @throws NetworkClient.ClientVerifierExeption Client Verification Error
      * @throws SocketRoleException Server Socket Error
      */
-    protected void addClient(NetworkClient client) throws NetworkClient.ClientVerifierExeption, SocketRoleException {
+    public void addClient(NetworkClient client) throws NetworkClient.ClientVerifierExeption, SocketRoleException {
         // Verifies Client and this Socket
         if(!isHost) throw new SocketRoleException();
         for(NetworkClient c : clients)
@@ -148,7 +161,7 @@ public class UDPSocket {
      * @param client Client
      * @throws SocketRoleException Server Socket Error
      */
-    protected void removeClient(NetworkClient client) throws SocketRoleException {
+    public void removeClient(NetworkClient client) throws SocketRoleException {
         if(!isHost) throw new SocketRoleException();
         clients.remove(client);
     }
@@ -157,7 +170,7 @@ public class UDPSocket {
 
     /**
      * Socket Disposal
-     * <p>
+     * <p/>
      * Closes socket instances and
      * cleans up network objects.
      */

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Json;
 import com.gdx.game.manager.PreferenceManager;
 import com.gdx.game.manager.ResourceManager;
+import com.gdx.game.networking.NetworkClient;
 import com.gdx.game.networking.message.NetworkMessage;
 import com.gdx.game.networking.Socket;
 import com.gdx.game.screen.CharacterSelectionScreen;
@@ -12,6 +13,7 @@ import com.gdx.game.screen.GameScreen;
 import com.gdx.game.screen.MenuScreen;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -64,19 +66,32 @@ public class GdxGame extends Game {
 		try {
 			int port = 8080;
 			Socket server = Socket.host(port);
+
+			// Sleep 1 sec before Client creation
+			Thread.sleep(5 * 1000);
+			System.out.println("Starts Client");
+
 			Socket client = Socket.join(server.address, port);
+
 
 			// DEBUG
 			new Thread(() -> {
                 try {
                     NetworkMessage message = server.read(1024);
-					System.out.println(message);
+
+					// DEBUG
+//					System.out.println(message.getMessageType());
+//					System.out.println(message.getMessageUUID());
+//					System.out.println(message.get("x"));
+//
+//					System.out.println(message);
 
                 } catch(IOException e) {
                     throw new RuntimeException(e);
                 }
             }).start();
-			client.send(new Json().toJson(new NetworkMessage(server.address, "Hello World!")));
+
+//			client.send(NetworkMessage.create(NetworkMessage.MessageType.POSITION_MESSAGE, "x=10", "y=10").toString());
 
 		} catch(SocketException e) {
             throw new RuntimeException(e);
@@ -84,44 +99,20 @@ public class GdxGame extends Game {
             throw new RuntimeException(e);
         } catch(IOException e) {
             throw new RuntimeException(e);
+        } catch(InterruptedException e) {
+            throw new RuntimeException(e);
         }
-//		try {
-//			int port = 8080;
-//			Server server = new Server(port);
-//			DatagramSocket client = new DatagramSocket();
-//
-//			new Thread(() -> {
-//				byte[] data = new byte[1024];
-//				DatagramPacket packet = new DatagramPacket(data, data.length);
-//				try {
-//					server.receive(packet);
-//				} catch(IOException e) {
-//					System.out.println("Server: " + e.getMessage());
-//				}
-//				String message = new String(packet.getData()).split("--end")[0].strip();
-//				System.out.println("Message: " + message);
-//			}).start();
-//
-//			// Sends Message
-//			InetAddress ip = InetAddress.getByName("localhost");
-//			String message = "Hello World! --end";
-//			client.send(new DatagramPacket(message.getBytes(), message.getBytes().length, ip, port));
-//
-//			client.close();
-//			server.close();
-//
-//		}catch(SocketException e) {
-//			System.out.println(e.getMessage());
-//		} catch(UnknownHostException e) {
-//			System.out.println(e.getMessage());
-//        } catch(IOException e) {
-//			System.out.println(e.getMessage());
-//        }
     }
 
 	@Override
 	public void dispose() {
-		super.dispose();
+		try{
+			Socket.getInstance().close();
+		} catch(SocketException e) {
+            throw new RuntimeException(e);
+        }
+
+        super.dispose();
 		batch.dispose();
 		menuScreen.dispose();
 		characterSelectionScreen.dispose();
