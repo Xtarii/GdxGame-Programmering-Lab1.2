@@ -1,0 +1,11 @@
+{
+    conversations: {
+            1: {
+                    id: 1
+                    dialog: THERES THIA DOG FELLA WHO KEEPS EATING MY CHICKENS
+            }
+    }
+    associatedChoices: {
+    }
+    currentConversationID: 1
+    }

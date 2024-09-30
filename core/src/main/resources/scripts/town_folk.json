@@ -205,7 +205,7 @@
 		entityStatus : VILLAGER
 		state : IMMOBILE
 		direction : DOWN
-		conversationConfigPath : ""
+		conversationConfigPath : "conversation_008.json"
 		questConfigPath : ""
 		currentQuestID : ""
 		itemTypeID: NONE
