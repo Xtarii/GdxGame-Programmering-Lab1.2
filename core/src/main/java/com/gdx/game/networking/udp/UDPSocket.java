@@ -72,7 +72,7 @@ public class UDPSocket {
      * @throws SocketException UDP Creation Error
      */
     public UDPSocket(InetAddress address, int port) throws SocketException {
-        socket = new DatagramSocket();
+        socket = new DatagramSocket(port);
         this.address = address;
         this.port = port;
         isHost = false;
