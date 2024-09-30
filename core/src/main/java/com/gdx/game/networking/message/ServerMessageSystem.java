@@ -13,6 +13,9 @@ public class ServerMessageSystem implements NetworkMessageSystem {
 //        if(message.get("uuid") != null) return; // Can't Respond to itself
         NetworkClient client = new NetworkClient(message.sender);
 
+        System.out.println(message);
+
+
         try {
             Socket.getInstance().addClient(client);
             // Sends Client Data back
@@ -26,6 +29,8 @@ public class ServerMessageSystem implements NetworkMessageSystem {
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println("Sent message...");
     }
 
     @Override

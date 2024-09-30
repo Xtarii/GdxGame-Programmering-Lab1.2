@@ -5,6 +5,8 @@ import com.gdx.game.networking.udp.UDPSocket;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Network Socket
@@ -78,10 +80,11 @@ public class Socket extends UDPSocket {
         // Connect to server
         NetworkMessage message = NetworkMessage.createEmpty(NetworkMessage.MessageType.CONNECTION_MESSAGE);
 
+        AtomicReference<UUID> uuid = new AtomicReference<>();
         new Thread(() -> {
             try {
                 NetworkMessage res = read(1024);
-                System.out.println(res);
+                uuid.set(res.getMessageUUID());
 
             } catch(IOException e) {
                 throw new RuntimeException(e);
@@ -89,8 +92,12 @@ public class Socket extends UDPSocket {
         }).start();
         send(message.toString());
 
+        while(true) {
+            System.out.println(uuid);
+        }
+
         // Create Local Client
-        updateThread.start();
+//        updateThread.start();
     }
 
 
