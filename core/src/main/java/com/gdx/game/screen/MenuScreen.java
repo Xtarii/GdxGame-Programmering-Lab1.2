@@ -15,6 +15,7 @@ import com.gdx.game.manager.AnimationManager;
 import com.gdx.game.manager.ResourceManager;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 
 import static com.gdx.game.audio.AudioObserver.AudioTypeEvent.MENU_THEME;
 
@@ -31,6 +32,7 @@ public class MenuScreen extends BaseScreen {
 
         menuTable = createTable();
         handleBackground();
+        handleMultiplayerButton();
         handleNewButton();
         handleLoadButton();
         handleOptionButton();
@@ -62,7 +64,7 @@ public class MenuScreen extends BaseScreen {
     private void handleExitButton() {
         createButton("Exit", 0, menuTable.getHeight()/9, menuTable);
 
-        Actor exitButton = menuTable.getCells().get(3).getActor();
+        Actor exitButton = menuTable.getCells().get(4).getActor();
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent even, float x, float y) {
@@ -74,7 +76,7 @@ public class MenuScreen extends BaseScreen {
     private void handleOptionButton() {
         createButton("Options", 0, menuTable.getHeight()/10, menuTable);
 
-        Actor optionButton = menuTable.getCells().get(2).getActor();
+        Actor optionButton = menuTable.getCells().get(3).getActor();
         optionButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent even, float x, float y) {
@@ -87,10 +89,27 @@ public class MenuScreen extends BaseScreen {
         });
     }
 
+    // Creates Multiplayer Button
+    private void handleMultiplayerButton() {
+        createButton("Multiplayer", 0, menuTable.getHeight()/10, menuTable);
+
+        Actor newButton = menuTable.getCells().get(0).getActor();
+        newButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent even, float x, float y) {
+                setScreenWithTransition(
+                        (BaseScreen) gdxGame.getScreen(),
+                        new MenuMultiplayerGameScreen(gdxGame, (BaseScreen) gdxGame.getScreen(), resourceManager),
+                        new ArrayList<>()
+                );
+            }
+        });
+    }
+
     private void handleNewButton() {
         createButton("New Game", 0, menuTable.getHeight()/10, menuTable);
 
-        Actor newButton = menuTable.getCells().get(0).getActor();
+        Actor newButton = menuTable.getCells().get(1).getActor();
         newButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent even, float x, float y) {
@@ -106,7 +125,7 @@ public class MenuScreen extends BaseScreen {
     private void handleLoadButton() {
         createButton("Load Game", 0, menuTable.getHeight()/15, menuTable);
 
-        Actor loadButton = menuTable.getCells().get(1).getActor();
+        Actor loadButton = menuTable.getCells().get(2).getActor();
         loadButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent even, float x, float y) {

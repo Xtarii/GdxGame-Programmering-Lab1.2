@@ -92,9 +92,13 @@ public class Socket extends UDPSocket {
         }).start();
         send(message.toString());
 
-        while(true) {
+
+        while(uuid.get() == null) {
             System.out.println(uuid);
+            try{ Thread.sleep(500); } catch(InterruptedException e) { throw new RuntimeException(e); }
         }
+
+        System.out.println(uuid.get());
 
         // Create Local Client
 //        updateThread.start();
@@ -145,6 +149,20 @@ public class Socket extends UDPSocket {
         Socket socket = new Socket(address, port);
         socket.connectToServer();
         return socket;
+    }
+
+
+
+    /**
+     * Closes Socket Instance
+     * <p/>
+     * Closes socket and removes instance.
+     *
+     * @throws SocketException Socket Closing Error
+     */
+    public static void closeInstance() throws SocketException {
+        Socket.getInstance().close();
+        instance = null;
     }
 
 

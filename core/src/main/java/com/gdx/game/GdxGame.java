@@ -67,39 +67,9 @@ public class GdxGame extends Game {
 			int port = 8080;
 			Socket server = Socket.host(port);
 
-			// Sleep 1 sec before Client creation
-			Thread.sleep(5 * 1000);
-			System.out.println("Starts Client");
-
-			Socket client = Socket.join(server.address, port);
-
-
-			// DEBUG
-			new Thread(() -> {
-                try {
-                    NetworkMessage message = server.read(1024);
-
-					// DEBUG
-//					System.out.println(message.getMessageType());
-//					System.out.println(message.getMessageUUID());
-//					System.out.println(message.get("x"));
-//
-//					System.out.println(message);
-
-                } catch(IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }).start();
-
-//			client.send(NetworkMessage.create(NetworkMessage.MessageType.POSITION_MESSAGE, "x=10", "y=10").toString());
-
 		} catch(SocketException e) {
             throw new RuntimeException(e);
         } catch(UnknownHostException e) {
-            throw new RuntimeException(e);
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        } catch(InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
