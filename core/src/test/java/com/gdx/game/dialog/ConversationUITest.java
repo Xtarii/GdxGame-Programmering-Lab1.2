@@ -49,6 +49,7 @@ public class ConversationUITest {
         assertThat("1").isEqualTo(conversationUI.getCurrentConversationGraph().getCurrentConversationID());
     }
 
+
     @Test
     public void testLoadCourtesyConversation_ShouldSucceed() {
         Json json = new Json();
