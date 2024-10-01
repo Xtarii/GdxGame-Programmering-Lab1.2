@@ -131,6 +131,9 @@ public class Socket extends UDPSocket {
     public static Socket host(int port) throws SocketException, UnknownHostException {
         Socket socket = new Socket(port);
         NetworkClient.setLocal(new NetworkClient(socket.address));
+
+        // DEBUG
+
         return socket;
     }
     /**

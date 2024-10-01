@@ -57,21 +57,6 @@ public class GdxGame extends Game {
 		characterSelectionScreen = new CharacterSelectionScreen(this, resourceManager);
 
 		this.setScreen(menuScreen);
-
-
-
-
-
-		/// DEBUG
-		try {
-			int port = 8080;
-			Socket server = Socket.host(port);
-
-		} catch(SocketException e) {
-            throw new RuntimeException(e);
-        } catch(UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 	@Override
