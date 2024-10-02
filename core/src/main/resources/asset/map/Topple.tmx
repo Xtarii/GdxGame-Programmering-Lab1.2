@@ -275,7 +275,7 @@
   <object id="255" name="TOWN_FOLK4" x="71.3333" y="123.333" width="28" height="29.3333"/>
   <object id="257" name="PLAYER_START" x="43.8182" y="127.273" width="19.8182" height="22.3636"/>
   <!-- added Townfolk 5 -->
-  <object id="290" name="TOWN_FOLK5" x="250.667" y="290.667" width="26.6667" height="26"/>
+  <object id="290" name="TOWN_FOLK5" x="440.667" y="240.667" width="26.6667" height="26"/>
 
  </objectgroup>
  <objectgroup id="5" name="MAP_QUEST_ITEM_SPAWN_LAYER">
