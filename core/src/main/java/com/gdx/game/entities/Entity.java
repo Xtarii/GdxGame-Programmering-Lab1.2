@@ -116,6 +116,14 @@ public class Entity {
 		components.add(physicsComponent);
 		components.add(graphicsComponent);
 	}
+	public Entity(InputComponent inputCpnt, PhysicsComponent physicsCpnt, GraphicsComponent graphicsCpnt, String name) {
+		this(inputCpnt, physicsCpnt, graphicsCpnt);
+		this.entityConfig.setName(name);
+	}
+	public Entity(Entity entity, String name){
+		this(entity);
+		entity.entityConfig.setName(name);
+	}
 
 	public EntityConfig getEntityConfig() {
 		return entityConfig;
@@ -277,5 +285,16 @@ public class Entity {
 		return entity;
 	}
 
-
+	/**
+	 * Creates new Entity Instance
+	 *
+	 * @param entityConfig Entity Config
+	 * @param name Entity Name
+	 * @return Entity
+	 */
+	public static Entity initEntity(EntityConfig entityConfig, String name) {
+		Entity entity = initEntity(entityConfig);
+		entity.entityConfig.setName(name);
+		return entity;
+	}
 }

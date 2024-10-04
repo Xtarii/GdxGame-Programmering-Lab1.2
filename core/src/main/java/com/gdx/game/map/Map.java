@@ -264,6 +264,7 @@ public abstract class Map implements AudioSubject {
         for(MapObject object: enemySpawnLayer.getObjects()) {
             String objectName = object.getName();
 
+            // Skip if object is invalid, to prevent a crash.
             if (objectName == null || objectName.isEmpty()) {
                 continue;
             }

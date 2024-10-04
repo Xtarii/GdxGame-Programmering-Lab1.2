@@ -20,6 +20,10 @@ public class EntityConfig {
     private String itemTypeID;
     private ObjectMap<String, String> entityProperties;
     private Array<Drop> drops;
+    /**
+     * Entity Name
+     */
+    private String name;
 
     public enum EntityProperties {
         ENTITY_HEALTH_POINTS,
@@ -66,6 +70,19 @@ public class EntityConfig {
         drops = new Array<>();
         drops.addAll(config.getDrops());
     }
+
+    /**
+     * Gets Entity Name
+     *
+     * @return Name
+     */
+    public String getName() { return name; }
+    /**
+     * Sets Entity Name
+     *
+     * @param name New Name
+     */
+    public void setName(String name) { this.name = name; }
 
     public ObjectMap<String, String> getEntityProperties() {
         return entityProperties;

@@ -38,6 +38,8 @@ public class InventorySlotTooltip extends Window {
         if (inventorySlot.hasItem()) {
             StringBuilder string = new StringBuilder();
             InventoryItem item = inventorySlot.getTopInventoryItem();
+
+            // Item Description
             string.append(String.format("Rarity: %s", item.getItemRarity().getValue()));
             string.append(System.getProperty("line.separator"));
             string.append(item.getItemShortDescription());
@@ -55,7 +57,11 @@ public class InventorySlotTooltip extends Window {
 
             description.setText(string);
 
-            this.getTitleLabel().setText(item.getItemTypeID().toString());
+            // Sets Item Display Name
+            String[] parts = item.getItemTypeID().toString().split("0", 2);
+            String name = String.format("%s LVL.%s", parts[0], parts[1]);
+            // Item Tile Label
+            this.getTitleLabel().setText(name);
             this.getTitleLabel().setColor(item.getItemRarity().getColor());
         } else {
             description.setText("");

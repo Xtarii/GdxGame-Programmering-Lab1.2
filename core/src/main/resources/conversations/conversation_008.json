@@ -1,0 +1,38 @@
+{
+  "conversations": {
+    "1": {
+      "id": 1,
+      "dialog": "Did you hear about the Great Chicken Chase of Eldertown?"
+    },
+    "2": {
+      "id": 2,
+      "dialog": "No? Well, I don't really have time to tell the story, anyway."
+    },
+    "3": {
+      "id": 3,
+      "dialog": "See you around, adventurer."
+    }
+  },
+  "associatedChoices": {
+    "1": [
+      {
+        "class": "com.gdx.game.dialog.ConversationChoice",
+        "sourceId": 1,
+        "destinationId": 2,
+        "choicePhrase": "Next",
+        "conversationCommandEvent": "NONE"
+      }
+    ],
+    "2": [
+      {
+        "class": "com.gdx.game.dialog.ConversationChoice",
+        "sourceId": 2,
+        "destinationId": 3,
+        "choicePhrase": "Next",
+        "conversationCommandEvent": "NONE"
+      }
+    ]
+  },
+  "currentConversationID": 1
+}
+  

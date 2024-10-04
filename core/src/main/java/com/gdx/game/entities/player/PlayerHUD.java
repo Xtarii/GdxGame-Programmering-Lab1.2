@@ -507,6 +507,9 @@ public class PlayerHUD implements Screen, AudioSubject, ProfileObserver, ClassOb
                 }
 
                 if (inventoryUI.doesInventoryHaveSpace()) {
+                    /// entity.getEntityConfig().getItemTypeID()
+                    /// Is the Item ID
+
                     inventoryUI.addEntityToInventory(entity.getEntityConfig().getItemTypeID(), entity.getEntityConfig().getCurrentQuestID());
                     mapManager.clearCurrentSelectedMapEntity();
                     conversationUI.setVisible(false);
