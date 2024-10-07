@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.gdx.game.inventory.item.InventoryItem;
 
-public class EquipmentSet {         /** */
+public class EquipmentSet {
 
     private InventoryItem.ItemSetID itemSetID;
     private String itemSetDescription;

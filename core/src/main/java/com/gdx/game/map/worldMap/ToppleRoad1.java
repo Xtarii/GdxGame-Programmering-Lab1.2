@@ -2,6 +2,7 @@ package com.gdx.game.map.worldMap;
 
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.game.audio.AudioObserver;
+import static com.gdx.game.audio.AudioObserver.AudioTypeEvent.TEST_THEME;
 import com.gdx.game.component.Component;
 import com.gdx.game.entities.Entity;
 import com.gdx.game.entities.EntityConfig;
@@ -9,8 +10,6 @@ import com.gdx.game.entities.EntityFactory;
 import com.gdx.game.map.Map;
 import com.gdx.game.map.MapFactory;
 import com.gdx.game.profile.ProfileManager;
-
-import static com.gdx.game.audio.AudioObserver.AudioTypeEvent.TEST_THEME;
 
 public class ToppleRoad1 extends Map {
 
@@ -27,6 +26,10 @@ public class ToppleRoad1 extends Map {
         Entity rabite2 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.RABITE2);
         initSpecialEntityPosition(rabite2);
         mapEntities.add(rabite2);
+        
+        Entity rabite3 = EntityFactory.getInstance().getEntityByName(EntityFactory.EntityName.RABITE3);
+        initSpecialEntityPosition(rabite3);
+        mapEntities.add(rabite3);
 
     }
 

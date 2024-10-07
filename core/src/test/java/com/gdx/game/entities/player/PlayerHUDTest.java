@@ -1,5 +1,23 @@
 package com.gdx.game.entities.player;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.MockedConstruction;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockConstruction;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,39 +28,21 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.gdx.game.GdxRunner;
 import com.gdx.game.battle.BattleObserver;
+import static com.gdx.game.component.Component.MESSAGE_TOKEN;
 import com.gdx.game.component.ComponentObserver;
 import com.gdx.game.dialog.ConversationGraph;
 import com.gdx.game.dialog.ConversationGraphObserver;
 import com.gdx.game.entities.Entity;
 import com.gdx.game.entities.EntityFactory;
 import com.gdx.game.entities.player.characterClass.ClassObserver;
+import com.gdx.game.inventory.InventoryObserver;
 import com.gdx.game.inventory.item.InventoryItem;
 import com.gdx.game.inventory.item.InventoryItemFactory;
-import com.gdx.game.inventory.InventoryObserver;
 import com.gdx.game.inventory.store.StoreInventoryObserver;
 import com.gdx.game.manager.ResourceManager;
 import com.gdx.game.map.MapManager;
 import com.gdx.game.profile.ProfileManager;
 import com.gdx.game.profile.ProfileObserver;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.MockedConstruction;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-
-import static com.gdx.game.component.Component.MESSAGE_TOKEN;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockConstruction;
 
 @ExtendWith(GdxRunner.class)
 public class PlayerHUDTest {

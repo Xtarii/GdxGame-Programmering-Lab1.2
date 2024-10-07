@@ -1,5 +1,7 @@
 package com.gdx.game.entities;
 
+import java.util.Hashtable;
+
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.gdx.game.component.Component;
@@ -10,8 +12,6 @@ import com.gdx.game.entities.npc.enemy.EnemyPhysicsComponent;
 import com.gdx.game.entities.player.PlayerGraphicsComponent;
 import com.gdx.game.entities.player.PlayerInputComponent;
 import com.gdx.game.entities.player.PlayerPhysicsComponent;
-
-import java.util.Hashtable;
 
 public class EntityFactory {
 
@@ -38,7 +38,7 @@ public class EntityFactory {
         TOWN_FOLK1, TOWN_FOLK2, TOWN_FOLK3, TOWN_FOLK4, TOWN_FOLK5,
         TOWN_FOLK6, TOWN_FOLK7, TOWN_FOLK8, TOWN_FOLK9, TOWN_FOLK10,
         TOWN_FOLK11, TOWN_FOLK12, TOWN_FOLK13, TOWN_FOLK14, TOWN_FOLK15,
-        RABITE, RABITE2,
+        RABITE, RABITE2,RABITE3,
         QUEST003_TASK002,
         FIRE
     }

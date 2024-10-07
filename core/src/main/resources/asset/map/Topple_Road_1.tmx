@@ -126,6 +126,7 @@
  <objectgroup id="5" name="MAP_ENEMY_SPAWN_LAYER">
   <object id="15" name="RABITE" x="128.667" y="256.667" width="31.3333" height="31.3333"/>
   <object id="131" name="RABITE2" x="219.398" y="159.742" width="31.3333" height="31.3333"/>
+  <object id="132" name="RABITE3" x="230.398" y="92.742" width="31.3333" height="31.3333"/>
  </objectgroup>
  <objectgroup id="6" name="MAP_PORTAL_LAYER">
   <object id="130" name="TOPPLE" x="436.667" y="369" width="10" height="57.6667"/>
